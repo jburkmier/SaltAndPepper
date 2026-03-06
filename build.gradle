@@ -1,0 +1,27 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['app/src']
+        }
+    }
+}
+
+application {
+    mainClass = 'sp.Main'
+}
+
+run {
+    standardInput = System.in
+}
+
+dependencies {
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+}
