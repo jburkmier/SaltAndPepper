@@ -2,7 +2,7 @@
 
 ## Description: 
 Salt and Pepper is an ongoing project and features will be added and as it grows. 
-It currently connects uses Java and SQL to browse the recipes in a database. 
+It currently uses Java and SQL to browse the recipes in a database. 
 
 ## Current Features: 
 - Browse Recipes
