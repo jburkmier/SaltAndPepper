@@ -47,11 +47,13 @@ public class UI {
             printMainMenu();
             int choice = scanner.nextInt();
             scanner.nextLine(); // consume newline
-            System.out.print("Make a Selection (1-5)");
 
             switch(choice){
                 case 1 -> {
                     new Browse(scanner, connection).run();
+                }
+                case 2 -> {
+                    running = false; 
                 }
             }
 
@@ -62,7 +64,7 @@ public class UI {
     private void printMainMenu() {
         System.out.println("\n+++++ Main Menu +++++ ");
         System.out.println("1. Browse Recipes");
-        //System.out.println("2. Search Meals Based on Availability");
+        System.out.println("2. Exit");
     }
 
 	// Required string prompt

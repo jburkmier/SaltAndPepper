@@ -1,0 +1,2 @@
+SELECT Meal_name
+FROM RECIPE;
