@@ -26,7 +26,7 @@ public class RecipeBook {
         scanner.nextLine();
 
         if (choice == 3) {
-            System.out.println("Exiting Browse...");
+            System.out.println("Exiting Recipe Book...");
             return;
         }
         browseRecipes(choice);
