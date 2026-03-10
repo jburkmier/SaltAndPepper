@@ -17,8 +17,8 @@ public class RecipeBook {
     }
 
     public void run() {
-        System.out.println("+++++ Browse Recipes +++++");
-        System.out.println("1. View all recipes");
+        System.out.println("+++++ Recipe Book +++++");
+        System.out.println("1. View All Recipes");
         System.out.println("2. View Recipe Card");
         System.out.println("3. Exit");
 
@@ -39,8 +39,7 @@ public class RecipeBook {
                     break;
                     }
                 case 2 -> {
-                    System.out.println("\nView Recipe Card: ");
-                    System.out.println("Enter Name of Recipe to View Card");
+                    viewCard();
                     break;
                 }
                 default -> System.out.println("Invalid choice");
@@ -77,5 +76,48 @@ public class RecipeBook {
             }
         }
         
+    }
+
+    public void viewCard(){
+        PreparedStatement ps = null;
+        ResultSet rs = null; 
+
+        String recipe; 
+        System.out.println("\n Enter name of recipe: ");
+        recipe = scanner.nextLine();
+
+        try{
+        ps = connection.prepareStatement("""
+            SELECT Meal_name, Ingredients, Instructions
+            FROM RECIPE
+            WHERE Meal_name = ?
+            """);
+
+        ps.setString(1, recipe);
+        rs = ps.executeQuery();
+
+        if (rs.next()){
+            System.out.println("\nRecipe Card");
+            System.out.println("Name: " + rs.getString("Meal_name"));
+            System.out.println("Ingredients: " + rs.getString("Ingredients"));
+            System.out.println("Instructions: " + rs.getString("Instructions"));
+        } else {
+            System.out.println("Recipe not found");
+        }
+
+        }catch (SQLException e){
+            System.out.println("Error loading recipes: " + e.getMessage());          
+        } finally {
+            try { 
+                if (rs != null){
+                    rs.close();
+                }
+                if (ps != null){
+                    ps.close();
+                }
+            } catch (SQLException e){
+                System.out.println("Failed to close: " + e.getMessage());
+            }
+        }
     }
 }
