@@ -12,7 +12,7 @@ public class UI {
     private static Connection connection;
     
     public void run(){
-        System.out.println("====== Welcome to Salt and Pepper! ======");
+        System.out.println("\n====== Welcome to Salt and Pepper! ======");
         connectOrExit();
         mainMenu();
         closeConnection();
@@ -53,6 +53,9 @@ public class UI {
                     new RecipeBook(scanner, connection).run();
                 }
                 case 2 -> {
+                    new MealPlan(scanner, connection).run();
+                }
+                case 3 -> {
                     running = false; 
                 }
             }
@@ -64,7 +67,8 @@ public class UI {
     private void printMainMenu() {
         System.out.println("\n+++++ Main Menu +++++ ");
         System.out.println("1. Open Recipe Book");
-        System.out.println("2. Exit");
+        System.out.println("2. Open Meal Plan");
+        System.out.println("3. Exit");
     }
 
 	// Required string prompt

@@ -17,7 +17,7 @@ public class RecipeBook {
     }
 
     public void run() {
-        System.out.println("+++++ Recipe Book +++++");
+        System.out.println("\n+++++ Recipe Book +++++");
         System.out.println("1. View All Recipes");
         System.out.println("2. View Recipe Card");
         System.out.println("3. Exit");
@@ -26,7 +26,7 @@ public class RecipeBook {
         scanner.nextLine();
 
         if (choice == 3) {
-            System.out.println("Exiting Browse...");
+            System.out.println("Exiting Recipe Book...");
             return;
         }
         browseRecipes(choice);
@@ -97,10 +97,9 @@ public class RecipeBook {
         rs = ps.executeQuery();
 
         if (rs.next()){
-            System.out.println("\nRecipe Card");
-            System.out.println("Name: " + rs.getString("Meal_name"));
-            System.out.println("Ingredients: " + rs.getString("Ingredients"));
-            System.out.println("Instructions: " + rs.getString("Instructions"));
+            System.out.println("\n" + rs.getString("Meal_name"));
+            System.out.println("Ingredients: \n" + rs.getString("Ingredients"));
+            System.out.println("Instructions: \n" + rs.getString("Instructions"));
         } else {
             System.out.println("Recipe not found");
         }
