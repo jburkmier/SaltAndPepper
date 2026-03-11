@@ -15,6 +15,7 @@ public class UI {
         System.out.println("====== Welcome to Salt and Pepper! ======");
         connectOrExit();
         mainMenu();
+        closeConnection();
     }
 
     public void connectOrExit(){
@@ -40,6 +41,30 @@ public class UI {
         }
     }
     
+    public void mainMenu() {
+        boolean running = true; 
+        while (running) {
+            printMainMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+            System.out.print("Make a Selection (1-5)");
+
+            switch(choice){
+                case 1 -> {
+                    new Browse(scanner, connection).run();
+                }
+            }
+
+
+        }
+    }
+
+    private void printMainMenu() {
+        System.out.println("\n+++++ Main Menu +++++ ");
+        System.out.println("1. Browse Recipes");
+        //System.out.println("2. Search Meals Based on Availability");
+    }
+
 	// Required string prompt
 	public static String promptRequiredString(Scanner scanner, String label) {
 		while (true) {
@@ -62,7 +87,7 @@ public class UI {
 		}
 	}
 
-    // confirm yes or no message
+    //confirm yes or no message
 	public static boolean confirm(Scanner scanner, String message) {
 		while (true) {
 			System.out.print(message + " (y/n): ");
@@ -73,10 +98,12 @@ public class UI {
 		}
 	}
 
-
-    public static void mainMenu(){
-        System.out.println("\n+++++ Main Menu +++++ ");
-        System.out.println("1. Browse Recipes");
-        //System.out.println("2. Search Meals Based on Availability");
-    }
+	//close the connection
+	private void closeConnection() {
+		if (connection == null) return;
+		try {
+			connection.close();
+		} catch (SQLException ignored) {
+		}
+	}
 }
