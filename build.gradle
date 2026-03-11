@@ -25,3 +25,19 @@ run {
 dependencies {
     implementation 'com.mysql:mysql-connector-j:8.3.0'
 }
+
+javadoc {
+    source = fileTree('app/src'){
+        include '**/*.java'
+    }
+    classpath = files()
+    destinationDir = file("$buildDir/docs/javadoc")
+}
+
+tasks.register('publishDocs', Copy){
+    dependsOn javadoc
+    from "$buildDir/docs/javadoc"
+    into "$projectDir/docs"
+}
+
+build.finalizedBy publishDocs
