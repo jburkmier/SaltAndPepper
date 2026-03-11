@@ -2,6 +2,7 @@
 
 ## Author
 Jennifer Burkmier
+
 3/11/2026 - present
 
 ## Description: 
@@ -27,9 +28,9 @@ Features will be added and changed routinely. Use the "main" branch for the most
     gradle run
     
    Connect to database: 
-   URL: jdbc:mysql://localhost:3306/SaltAndPepper
-   Username: MYSQL username
-   Password: MYSQL password
+    URL: jdbc:mysql://localhost:3306/SaltAndPepper
+    Username: MYSQL username
+    Password: MYSQL password
 
 ## Current Features: 
 - View all recipes in Cook Book
@@ -45,11 +46,9 @@ Features will be added and changed routinely. Use the "main" branch for the most
 - Using GIT locally to push to GITHUB
 
 ## Ideas for Expansion: 
-- Sort answers by ingredient amounts
-- Suggest meals based on what is currently on stock in pantry 
+- Suggest meals based on what is currently on stock
 - Meal plan for each day of week for breakfast, lunch, dinner
 - Build grocery list from meal plan
-- Edit meals into database
 - Log in feature for different accounts
 - Build Unit Tests
 - Javadoc documentation
