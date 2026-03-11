@@ -1,16 +1,27 @@
 
-INSERT INTO RECIPE(Meal_name, Ingredients, Instructions) VALUES
+INSERT INTO RECIPE(Meal_name, Measurements, Ingredients, Instructions) VALUES
 (
 "Peanut Butter and Jelly", 
+"   1 TBS
+   1 TBS
+   2 Slices",
 "   peanut butter
    grape jelly
    whole wheat bread", 
 "   1. Place ingredients on bread
    2. Place pieces of bread together");
 
-INSERT INTO RECIPE(Meal_name, Ingredients, Instructions) VALUES
+INSERT INTO RECIPE(Meal_name, Measurements, Ingredients, Instructions) VALUES
 (
 "Turkey Chili", 
+"   1 pound
+   15 oz can
+   1 can 
+   1 TBS
+   4 cups
+   1
+   3
+   2 TBS",
 "   Ground Turkey
    Crushed Tomatoes
    Black Beans

@@ -1,8 +1,9 @@
 # SaltAndPepper
 
 ## Description: 
-Salt and Pepper is an ongoing project and features will be added and as it grows. 
-It currently connects uses Java and SQL to browse the recipes in a database. 
+Salt and Pepper is an ongoing project that demonstrates knowledge of skills listed in "Skills Demonstrated" section. This is a personal side project to apply what I am learning in university but is not a school project. 
+
+Features will be added and changed routinely. Use the "main" branch for the most up-to-date version but the "InProgress" branch can be used to see what new features or updates I am currently working on. 
 
 ## Current Features: 
 - View all recipes in Recipe Book
@@ -18,7 +19,20 @@ It currently connects uses Java and SQL to browse the recipes in a database.
    Username: MYSQL username
    Password: MYSQL password
 
+## Skills Demonstrated
+- SQL Database Management
+- JAVA OOP
+- Using GIT locally to push to GITHUB
+
 ## Ideas for Expansion: 
 - Sort answers by ingredient amounts
 - Suggest meals based on what is currently on stock in pantry 
 - Meal plan for each day of week for breakfast, lunch, dinner
+- Build grocery list from meal plan
+- Add and edit meals into database
+- Log in feature for different accounts
+- Tests
+- Javadoc documentation
+- Expansion to a more interactive GUI (JavaFX or HTML)
+- Add ingredient amounts
+- Measurement converter
