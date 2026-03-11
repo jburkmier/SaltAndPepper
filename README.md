@@ -34,5 +34,4 @@ Features will be added and changed routinely. Use the "main" branch for the most
 - Tests
 - Javadoc documentation
 - Expansion to a more interactive GUI (JavaFX or HTML)
-- Add ingredient amounts
 - Measurement converter
