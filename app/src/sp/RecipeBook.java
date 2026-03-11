@@ -20,21 +20,14 @@ public class RecipeBook {
         System.out.println("\n+++++ Recipe Book +++++");
         System.out.println("1. View All Recipes");
         System.out.println("2. View Recipe Card");
-<<<<<<< HEAD
         System.out.println("3. Add New Recipe");
         System.out.println("4. Exit");
-=======
-        System.out.println("3. Exit");
->>>>>>> origin/main
+
 
         int choice = scanner.nextInt();
         scanner.nextLine();
 
-<<<<<<< HEAD
         if (choice == 4) {
-=======
-        if (choice == 3) {
->>>>>>> origin/main
             System.out.println("Exiting Recipe Book...");
             return;
         }
@@ -46,22 +39,14 @@ public class RecipeBook {
                 case 1 -> {
                     viewAll();
                     break;
-<<<<<<< HEAD
                 }
-=======
-                    }
->>>>>>> origin/main
                 case 2 -> {
                     viewCard();
                     break;
                 }
-<<<<<<< HEAD
                 case 3 -> {
                     addRecipe();
                 }
-=======
->>>>>>> origin/main
-                default -> System.out.println("Invalid choice");
             }
         }
         
@@ -102,20 +87,12 @@ public class RecipeBook {
         ResultSet rs = null; 
 
         String recipe; 
-<<<<<<< HEAD
         System.out.println("\nEnter name of recipe: ");
-=======
-        System.out.println("\n Enter name of recipe: ");
->>>>>>> origin/main
         recipe = scanner.nextLine();
 
         try{
         ps = connection.prepareStatement("""
-<<<<<<< HEAD
             SELECT Meal_name, Measurements, Ingredients, Instructions
-=======
-            SELECT Meal_name, Ingredients, Instructions
->>>>>>> origin/main
             FROM RECIPE
             WHERE Meal_name = ?
             """);
@@ -124,7 +101,6 @@ public class RecipeBook {
         rs = ps.executeQuery();
 
         if (rs.next()){
-<<<<<<< HEAD
             System.out.println("\n+++++" + rs.getString("Meal_name") + "+++++");
 
             String[] ingredients = rs.getString("Ingredients").split("\n");
@@ -140,11 +116,6 @@ public class RecipeBook {
             }
            // System.out.println("Ingredients: \n" + rs.getString("Measurements") + " " + rs.getString("Ingredients"));
             System.out.println("\nInstructions: \n" + rs.getString("Instructions"));
-=======
-            System.out.println("\n" + rs.getString("Meal_name"));
-            System.out.println("Ingredients: \n" + rs.getString("Ingredients"));
-            System.out.println("Instructions: \n" + rs.getString("Instructions"));
->>>>>>> origin/main
         } else {
             System.out.println("Recipe not found");
         }
@@ -164,7 +135,6 @@ public class RecipeBook {
             }
         }
     }
-<<<<<<< HEAD
 
     public void addRecipe(){
         PreparedStatement ps = null;
@@ -217,7 +187,4 @@ public class RecipeBook {
             }
             return builder;
         }
-
-=======
->>>>>>> origin/main
-}
+    }
