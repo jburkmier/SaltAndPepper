@@ -20,7 +20,7 @@ public class RecipeBook {
         System.out.println("+++++ Browse Recipes +++++");
         System.out.println("1. View all recipes");
         System.out.println("2. View Recipe Card");
-        System.out.println("2. Exit");
+        System.out.println("3. Exit");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -33,45 +33,49 @@ public class RecipeBook {
     }
 
     public void browseRecipes(int choice) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
             switch (choice) {
                 case 1 -> {
                     viewAll();
+                    break;
                     }
                 case 2 -> {
                     System.out.println("\nView Recipe Card: ");
                     System.out.println("Enter Name of Recipe to View Card");
+                    break;
                 }
                 default -> System.out.println("Invalid choice");
             }
-        } catch (SQLException e) {
-            System.err.println("An error occurred while browsing recipes: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-            } catch (SQLException e) {
-                System.err.println("Failed to close resources: " + e.getMessage());
-            }
         }
-    }
+        
 
-    public void viewAll(){                                                      //LEFT OFF HERE, FIX THIS, SWITCH TO INPROGRESS
+    public void viewAll(){               
         PreparedStatement ps = null;
         ResultSet rs = null;
 
+        try{
         System.out.println("\nRecipes: ");
         ps = connection.prepareStatement("""
-            SELECT Recipe.Meal_name
+            SELECT Recipe.Meal_Name
             FROM RECIPE
             """);
         rs = ps.executeQuery();
         while (rs.next()) {
         System.out.println(rs.getString("Meal_name"));
-
+        }
+        }catch (SQLException e){
+            System.out.println("Error loading recipes: " + e.getMessage());          
+        } finally {
+            try { 
+                if (rs != null){
+                    rs.close();
+                }
+                if (ps != null){
+                    ps.close();
+                }
+            } catch (SQLException e){
+                System.out.println("Failed to close: " + e.getMessage());
+            }
+        }
+        
     }
-}
 }
