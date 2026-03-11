@@ -32,14 +32,16 @@ Features will be added and changed routinely. Use the "main" branch for the most
    Password: MYSQL password
 
 ## Current Features: 
-- View all recipes in Recipe Book
-- Search recipes and view card by name from Recipe Book
-- Add new recipes to Recipe Book
+- View all recipes in Cook Book
+- Search recipes and view page by name from Cook Book
+- Add new recipes to Cook Book
+- Edit recipes to Cook Book
 - View Meal Plan example functionality
 
 ## Skills Demonstrated
 - SQL Database Management
 - JAVA OOP
+- JDBC to access database from java
 - Using GIT locally to push to GITHUB
 
 ## Ideas for Expansion: 

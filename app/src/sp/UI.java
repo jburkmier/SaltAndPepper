@@ -50,7 +50,7 @@ public class UI {
 
             switch(choice){
                 case 1 -> {
-                    new RecipeBook(scanner, connection).run();
+                    new CookBook(scanner, connection).run();
                 }
                 case 2 -> {
                     new MealPlan(scanner, connection).run();
@@ -66,7 +66,7 @@ public class UI {
 
     private void printMainMenu() {
         System.out.println("\n+++++ Main Menu +++++ ");
-        System.out.println("1. Open Recipe Book");
+        System.out.println("1. Open Cook Book");
         System.out.println("2. Open Meal Plan");
         System.out.println("3. Exit");
     }

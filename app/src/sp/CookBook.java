@@ -6,32 +6,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class RecipeBook {
+public class CookBook {
 
     private final Connection connection;
     private final Scanner scanner;
 
-    public RecipeBook(Scanner scanner, Connection connection) {
+    public CookBook(Scanner scanner, Connection connection) {
         this.scanner = scanner;
         this.connection = connection;
     }
 
     public void run() {
-        System.out.println("\n+++++ Recipe Book +++++");
+        while (true){
+        System.out.println("\n+++++ Cook Book +++++");
         System.out.println("1. View All Recipes");
-        System.out.println("2. View Recipe Card");
+        System.out.println("2. View Recipe Page");
         System.out.println("3. Add New Recipe");
-        System.out.println("4. Exit to Main Menu");
+        System.out.println("4. Edit Recipe");
+        System.out.println("5. Exit to Main Menu");
 
 
         int choice = scanner.nextInt();
         scanner.nextLine();
 
-        if (choice == 4) {
-            System.out.println("Exiting Recipe Book...");
+        if (choice == 5) {
+            System.out.println("Closing Cook Book...");
             return;
         }
         browseRecipes(choice);
+        }
     }
 
     public void browseRecipes(int choice) {
@@ -41,11 +44,15 @@ public class RecipeBook {
                     break;
                 }
                 case 2 -> {
-                    viewCard();
+                    viewPage();
                     break;
                 }
                 case 3 -> {
                     addRecipe();
+                    break;
+                }
+                case 4 -> {
+                    editRecipe();
                     break;
                 }
             }
@@ -86,15 +93,21 @@ public class RecipeBook {
     }
 
     /**
-     * Displays recipe card of selected recipe
+     * Displays recipe page of selected recipe
      */
-    public void viewCard(){
-        PreparedStatement ps = null;
-        ResultSet rs = null; 
+    public void viewPage(){
 
         String recipe; 
         System.out.println("\nEnter name of recipe: ");
         recipe = scanner.nextLine();
+
+        displayRecipe(recipe);
+
+    }
+
+    public void displayRecipe(String recipeName){
+        PreparedStatement ps = null;
+        ResultSet rs = null; 
 
         try{
         ps = connection.prepareStatement("""
@@ -103,7 +116,7 @@ public class RecipeBook {
             WHERE Meal_name = ?
             """);
 
-        ps.setString(1, recipe);
+        ps.setString(1, recipeName);
         rs = ps.executeQuery();
 
         if (rs.next()){
@@ -120,7 +133,6 @@ public class RecipeBook {
                 }
                 System.out.printf("  %-20s %s\n", ingredients[i], measurement);
             }
-           // System.out.println("Ingredients: \n" + rs.getString("Measurements") + " " + rs.getString("Ingredients"));
             System.out.println("\nInstructions: \n" + rs.getString("Instructions"));
         } else {
             System.out.println("Recipe not found");
@@ -198,4 +210,70 @@ public class RecipeBook {
             }
             return builder;
         }
+
+    public void editRecipe(){
+        System.out.println("\nEnter Recipe to Edit:");
+        String recipeName = scanner.nextLine();
+
+        displayRecipe(recipeName);
+
+        System.out.println("\nWhat do you want to edit?");
+        System.out.println("1. Recipe Name");
+        System.out.println("2. Measurements");
+        System.out.println("3. Ingredients");
+        System.out.println("4. Instructions");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        String columnName = null;
+        String prompt = null;
+
+        switch(choice){
+            case 1 -> {
+                columnName = "Meal_Name";
+                prompt = "Enter new recipe name:";
+            }
+            case 2 -> {
+                columnName = "Measurements"; 
+                prompt = "Enter new measurements";
+            }
+            case 3 -> {
+                columnName = "Ingredients";
+                prompt = "Enter new ingredients";
+            }
+            case 4 -> {
+                columnName = "Instructions";
+                prompt = "Enter new instructions";
+            }
+            default -> {
+                System.out.println("Invalid choice");
+                return;
+            }
+        }
+        System.out.println(prompt);
+        String newValue = scanner.nextLine();
+        updateRecipeField(columnName, newValue, recipeName);
+    }
+
+    public void updateRecipeField(String columnName, String newValue, String recipeName){
+        String sql = "UPDATE RECIPE SET " + columnName + " = ? WHERE Meal_name = ?";
+
+        try(PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, newValue);
+            ps.setString(2, recipeName);
+
+            int rowsUpdated = ps.executeUpdate();
+
+            if(rowsUpdated > 0){
+                System.out.println("Recipe updated successfully.");
+            } else {
+                System.out.println("Recipe not found.");
+            }
+        } catch (SQLException e){
+            System.out.println("Error updating recipe.");
+            e.printStackTrace();
+        }
+    }
+
     }
