@@ -22,7 +22,7 @@ public class UI {
         while (true) { 
             System.out.println("\nSalt and Pepper SQL Connection");
 
-            String url = promptRequiredString(scanner, "URL (ex: jdbc:mysql://localhost:3306/SaltAndPepper)");
+            String url = promptRequiredString(scanner, "Enter URL (ex: jdbc:mysql://localhost:3306/SaltAndPepper)");
             String user = promptRequiredString(scanner, "Database Username");
             String pass = promptPassword("Database Password");
 
