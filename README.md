@@ -5,13 +5,17 @@ Salt and Pepper is an ongoing project and features will be added and as it grows
 It currently connects uses Java and SQL to browse the recipes in a database. 
 
 ## Current Features: 
-- Browse Recipes
+- View all recipes in Recipe Book
+- Search recipes and view card by name from Recipe Book
 
 ## How to Run: 
     gradle build
     gradle run
 
-    connect to database with MYSQL unsername and password
+   Connect to database: 
+   URL: jdbc:mysql://localhost:3306/SaltAndPepper
+   Username: MYSQL username
+   Password: MYSQL password
 
 ## Ideas for Expansion: 
 - Sort answers by ingredient amounts
