@@ -93,7 +93,7 @@ public class CookBook {
     }
 
     /**
-     * Displays recipe page of selected recipe
+     * Allows users to enter recipe name to view the recipe page
      */
     public void viewPage(){
 
@@ -105,6 +105,9 @@ public class CookBook {
 
     }
 
+    /**
+     * Displays recipe page
+     */
     public void displayRecipe(String recipeName){
         PreparedStatement ps = null;
         ResultSet rs = null; 
@@ -211,6 +214,9 @@ public class CookBook {
             return builder;
         }
 
+    /**
+     * Edits recipe page
+     */
     public void editRecipe(){
         System.out.println("\nEnter Recipe to Edit:");
         String recipeName = scanner.nextLine();
@@ -256,6 +262,13 @@ public class CookBook {
         updateRecipeField(columnName, newValue, recipeName);
     }
 
+    /**
+     * Updates a specific field of a recipe in the RECIPE table
+     * 
+     * @param columnName The column in the RECIPE table to update
+     * @param newValue The new value that will replace the existing
+     * @param recipeName The name of the recipe the user wants to change
+     */
     public void updateRecipeField(String columnName, String newValue, String recipeName){
         String sql = "UPDATE RECIPE SET " + columnName + " = ? WHERE Meal_name = ?";
 
