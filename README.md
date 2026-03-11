@@ -19,7 +19,5 @@ It currently connects uses Java and SQL to browse the recipes in a database.
 
 ## Ideas for Expansion: 
 - Sort answers by ingredient amounts
-- Search for Recipe by name
-- Select Recipe by browsing to see entire recipe card
 - Suggest meals based on what is currently on stock in pantry 
 - Meal plan for each day of week for breakfast, lunch, dinner
