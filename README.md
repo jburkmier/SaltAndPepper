@@ -8,6 +8,7 @@ Features will be added and changed routinely. Use the "main" branch for the most
 ## Current Features: 
 - View all recipes in Recipe Book
 - Search recipes and view card by name from Recipe Book
+- Add new recipes to Recipe Book
 - View Meal Plan example functionality
 
 ## How to Run: 
@@ -29,9 +30,9 @@ Features will be added and changed routinely. Use the "main" branch for the most
 - Suggest meals based on what is currently on stock in pantry 
 - Meal plan for each day of week for breakfast, lunch, dinner
 - Build grocery list from meal plan
-- Add and edit meals into database
+- Edit meals into database
 - Log in feature for different accounts
-- Tests
+- Build Unit Tests
 - Javadoc documentation
 - Expansion to a more interactive GUI (JavaFX or HTML)
 - Measurement converter

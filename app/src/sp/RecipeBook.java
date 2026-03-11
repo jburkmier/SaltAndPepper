@@ -142,6 +142,50 @@ public class RecipeBook {
 
         System.out.println("\nEnter Name of Recipe: ");
         String recipeName = scanner.nextLine();
+        System.out.println("\nEnter Measurements for Ingredients and type 'done' when finished");
+        String addMeasurements = (buildString()).toString();
+        System.out.println("\nEnter Ingredients");
+        String addIngredients = (buildString()).toString();
+        System.out.println("\nEnter Instructions");
+        String addInstructions = (buildString()).toString();
 
+        try{
+        ps = connection.prepareStatement("""
+            INSERT INTO RECIPE (Meal_name, Measurements, Ingredients, Instructions)
+            VALUES (?, ?, ?, ?)
+            """);
+
+        ps.setString(1, recipeName);
+        ps.setString(2, addMeasurements);
+        ps.setString(3, addIngredients);
+        ps.setString(4, addInstructions);
+        ps.executeUpdate();
+
+        System.out.println("Recipe added successfully!");
+
+        }catch (SQLException e){
+            System.out.println("Error loading recipes: " + e.getMessage());          
+        } finally {
+            try { 
+                if (ps != null){
+                    ps.close();
+                }
+            } catch (SQLException e){
+                System.out.println("Failed to close: " + e.getMessage());
+            }
+        }
     }
+
+    public StringBuilder buildString(){
+        StringBuilder builder = new StringBuilder();
+            while(true){
+                String line = scanner.nextLine();
+                if (line.equals("done")){
+                    break;
+                }
+            builder.append(line).append("\n");
+            }
+            return builder;
+        }
+
 }
