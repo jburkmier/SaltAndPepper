@@ -21,7 +21,7 @@ public class RecipeBook {
         System.out.println("1. View All Recipes");
         System.out.println("2. View Recipe Card");
         System.out.println("3. Add New Recipe");
-        System.out.println("4. Exit");
+        System.out.println("4. Exit to Main Menu");
 
 
         int choice = scanner.nextInt();
@@ -46,11 +46,14 @@ public class RecipeBook {
                 }
                 case 3 -> {
                     addRecipe();
+                    break;
                 }
             }
         }
         
-
+    /**
+     * Displays all recipes in the Recipe Book
+     */
     public void viewAll(){               
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -82,6 +85,9 @@ public class RecipeBook {
         
     }
 
+    /**
+     * Displays recipe card of selected recipe
+     */
     public void viewCard(){
         PreparedStatement ps = null;
         ResultSet rs = null; 
@@ -136,9 +142,11 @@ public class RecipeBook {
         }
     }
 
+    /**
+     * Adds recipe information to Recipe Book
+     */
     public void addRecipe(){
         PreparedStatement ps = null;
-        ResultSet rs = null; 
 
         System.out.println("\nEnter Name of Recipe: ");
         String recipeName = scanner.nextLine();
@@ -176,6 +184,9 @@ public class RecipeBook {
         }
     }
 
+    /**
+     * Helper method to insert information into Recipe 
+     */
     public StringBuilder buildString(){
         StringBuilder builder = new StringBuilder();
             while(true){

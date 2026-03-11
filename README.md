@@ -8,10 +8,7 @@ Features will be added and changed routinely. Use the "main" branch for the most
 ## Current Features: 
 - View all recipes in Recipe Book
 - Search recipes and view card by name from Recipe Book
-<<<<<<< HEAD
 - Add new recipes to Recipe Book
-=======
->>>>>>> origin/main
 - View Meal Plan example functionality
 
 ## How to Run: 
