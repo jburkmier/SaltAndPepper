@@ -7,6 +7,7 @@ It currently connects uses Java and SQL to browse the recipes in a database.
 ## Current Features: 
 - View all recipes in Recipe Book
 - Search recipes and view card by name from Recipe Book
+- View Meal Plan example functionality
 
 ## How to Run: 
     gradle build
