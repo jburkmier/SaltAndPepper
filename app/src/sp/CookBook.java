@@ -83,12 +83,13 @@ public class CookBook {
         try{
         System.out.println("\nRecipes: ");
         ps = connection.prepareStatement("""
-            SELECT Recipe.Meal_Name
+            SELECT Recipe.Meal_Name, Recipe.Category
             FROM RECIPE
             """);
         rs = ps.executeQuery();
         while (rs.next()) {
-        System.out.println(rs.getString("Meal_name"));
+        System.out.println(rs.getString("Category"));
+        System.out.println("   " + rs.getString("Meal_name"));
         }
         }catch (SQLException e){
             System.out.println("Error loading recipes: " + e.getMessage());          
@@ -130,7 +131,7 @@ public class CookBook {
 
         try{
         ps = connection.prepareStatement("""
-            SELECT Meal_name, Measurements, Ingredients, Instructions
+            SELECT Meal_name, Category, Measurements, Ingredients, Instructions
             FROM RECIPE
             WHERE Meal_name = ?
             """);
@@ -192,7 +193,7 @@ public class CookBook {
 
         try{
         ps = connection.prepareStatement("""
-            INSERT INTO RECIPE (Meal_name, Measurements, Ingredients, Instructions)
+            INSERT INTO RECIPE (Meal_name, Category, Measurements, Ingredients, Instructions)
             VALUES (?, ?, ?, ?)
             """);
 

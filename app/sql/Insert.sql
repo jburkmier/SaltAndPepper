@@ -1,7 +1,8 @@
 
-INSERT INTO RECIPE(Meal_name, Measurements, Ingredients, Instructions) VALUES
+INSERT INTO RECIPE(Meal_name, Category, Measurements, Ingredients, Instructions) VALUES
 (
 "Peanut Butter and Jelly", 
+"Vegetarian",
 "   1 TBS
    1 TBS
    2 Slices",
@@ -11,9 +12,10 @@ INSERT INTO RECIPE(Meal_name, Measurements, Ingredients, Instructions) VALUES
 "   1. Place ingredients on bread
    2. Place pieces of bread together");
 
-INSERT INTO RECIPE(Meal_name, Measurements, Ingredients, Instructions) VALUES
+INSERT INTO RECIPE(Meal_name, Category, Measurements, Ingredients, Instructions) VALUES
 (
 "Turkey Chili", 
+"Soup",
 "   1 pound
    15 oz can
    1 can 
