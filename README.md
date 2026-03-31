@@ -32,6 +32,8 @@ Features will be added and changed routinely. Use the "main" branch for the most
     Username: MYSQL username
     Password: MYSQL password
 
+    If "Connection failed: Communications link failure" occurs, check that MySQL service is started on your local machine.
+
 ## Current Features: 
 - View all recipes in Cook Book
 - Search recipes and view page by name from Cook Book
