@@ -6,16 +6,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * Interacts with the database of recipes
+ */
 public class CookBook {
 
     private final Connection connection;
     private final Scanner scanner;
 
+    /**
+     * Constructor for CookBook class
+     * @param scanner Scanner keyboard scanner
+     * @param connection Connection that connects to database
+     */
     public CookBook(Scanner scanner, Connection connection) {
         this.scanner = scanner;
         this.connection = connection;
     }
 
+    /**
+     * Displays options for interacting with Cook Book
+     */
     public void run() {
         while (true){
         System.out.println("\n+++++ Cook Book +++++");
@@ -37,6 +48,10 @@ public class CookBook {
         }
     }
 
+    /**
+     * Handles choice from run() method
+     * @param choice int choice selection from run() 
+     */
     public void browseRecipes(int choice) {
             switch (choice) {
                 case 1 -> {
@@ -107,6 +122,7 @@ public class CookBook {
 
     /**
      * Displays recipe page
+     * @param recipeName Name of recipe to display
      */
     public void displayRecipe(String recipeName){
         PreparedStatement ps = null;
@@ -165,9 +181,11 @@ public class CookBook {
 
         System.out.println("\nEnter Name of Recipe: ");
         String recipeName = scanner.nextLine();
+        System.out.println("\nEnter Category: ");
+        String categoryName = scanner.nextLine();
         System.out.println("\nEnter Measurements for Ingredients and type 'done' when finished");
         String addMeasurements = (buildString()).toString();
-        System.out.println("\nEnter Ingredients");
+        System.out.println("\nEnter Ingredients and type 'done' when finished");
         String addIngredients = (buildString()).toString();
         System.out.println("\nEnter Instructions");
         String addInstructions = (buildString()).toString();
@@ -179,9 +197,10 @@ public class CookBook {
             """);
 
         ps.setString(1, recipeName);
-        ps.setString(2, addMeasurements);
-        ps.setString(3, addIngredients);
-        ps.setString(4, addInstructions);
+        ps.setString(2, categoryName);
+        ps.setString(3, addMeasurements);
+        ps.setString(4, addIngredients);
+        ps.setString(5, addInstructions);
         ps.executeUpdate();
 
         System.out.println("Recipe added successfully!");
@@ -201,6 +220,7 @@ public class CookBook {
 
     /**
      * Helper method to insert information into Recipe 
+     * @return builder 
      */
     public StringBuilder buildString(){
         StringBuilder builder = new StringBuilder();
@@ -223,43 +243,62 @@ public class CookBook {
 
         displayRecipe(recipeName);
 
-        System.out.println("\nWhat do you want to edit?");
-        System.out.println("1. Recipe Name");
-        System.out.println("2. Measurements");
-        System.out.println("3. Ingredients");
-        System.out.println("4. Instructions");
+        while (true) {
+            System.out.println("\nWhat do you want to edit?");
+            System.out.println("1. Recipe Name");
+            System.out.println("2. Category");
+            System.out.println("3. Measurements");
+            System.out.println("4. Ingredients");
+            System.out.println("5. Instructions");
+            System.out.println("6. Done Editing");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
-        String columnName = null;
-        String prompt = null;
-
-        switch(choice){
-            case 1 -> {
-                columnName = "Meal_Name";
-                prompt = "Enter new recipe name:";
-            }
-            case 2 -> {
-                columnName = "Measurements"; 
-                prompt = "Enter new measurements";
-            }
-            case 3 -> {
-                columnName = "Ingredients";
-                prompt = "Enter new ingredients";
-            }
-            case 4 -> {
-                columnName = "Instructions";
-                prompt = "Enter new instructions";
-            }
-            default -> {
-                System.out.println("Invalid choice");
+            if (choice == 6) {
+                System.out.println("Finished editing.");
                 return;
             }
+
+            String columnName = null;
+            String newValue = null;
+
+            switch(choice){
+                case 1 -> {
+                    columnName = "Meal_Name";
+                    System.out.println("Enter new recipe name:");
+                    newValue = scanner.nextLine();
+                }
+                case 2 -> {
+                    columnName = "Category";
+                    System.out.println("Enter new category:");
+                    newValue = scanner.nextLine();
+                }
+                case 3 -> {
+                    columnName = "Measurements";
+                    System.out.println("Enter new measurements and type 'done' when finished:");
+                    newValue = buildString().toString();
+                }
+                case 4 -> {
+                    columnName = "Ingredients";
+                    System.out.println("Enter new ingredients and type 'done' when finished:");
+                    newValue = buildString().toString();
+                }
+                case 5 -> {
+                    columnName = "Instructions";
+                    System.out.println("Enter new instructions and type 'done' when finished:");
+                    newValue = buildString().toString();
+                }
+                default -> {
+                    System.out.println("Invalid choice.");
+                    continue;
+                }
+            }
+            updateRecipeField(columnName, newValue, recipeName);
+            if (choice == 1) {
+                recipeName = newValue;
+            }
         }
-        System.out.println(prompt);
-        String newValue = scanner.nextLine();
-        updateRecipeField(columnName, newValue, recipeName);
     }
 
     /**
