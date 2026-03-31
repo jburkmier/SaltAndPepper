@@ -68,12 +68,13 @@ public class CookBook {
         try{
         System.out.println("\nRecipes: ");
         ps = connection.prepareStatement("""
-            SELECT Recipe.Meal_Name
+            SELECT Recipe.Meal_Name, Recipe.Category
             FROM RECIPE
             """);
         rs = ps.executeQuery();
         while (rs.next()) {
-        System.out.println(rs.getString("Meal_name"));
+        System.out.println(rs.getString("Category"));
+        System.out.println("   " + rs.getString("Meal_name"));
         }
         }catch (SQLException e){
             System.out.println("Error loading recipes: " + e.getMessage());          
@@ -114,7 +115,7 @@ public class CookBook {
 
         try{
         ps = connection.prepareStatement("""
-            SELECT Meal_name, Measurements, Ingredients, Instructions
+            SELECT Meal_name, Category, Measurements, Ingredients, Instructions
             FROM RECIPE
             WHERE Meal_name = ?
             """);
@@ -165,6 +166,8 @@ public class CookBook {
 
         System.out.println("\nEnter Name of Recipe: ");
         String recipeName = scanner.nextLine();
+        System.out.println("\nEnter Category: ");
+        String categoryName = scanner.nextLine();
         System.out.println("\nEnter Measurements for Ingredients and type 'done' when finished");
         String addMeasurements = (buildString()).toString();
         System.out.println("\nEnter Ingredients");
@@ -174,14 +177,15 @@ public class CookBook {
 
         try{
         ps = connection.prepareStatement("""
-            INSERT INTO RECIPE (Meal_name, Measurements, Ingredients, Instructions)
+            INSERT INTO RECIPE (Meal_name, Category, Measurements, Ingredients, Instructions)
             VALUES (?, ?, ?, ?)
             """);
 
         ps.setString(1, recipeName);
-        ps.setString(2, addMeasurements);
-        ps.setString(3, addIngredients);
-        ps.setString(4, addInstructions);
+        ps.setString(2, categoryName);
+        ps.setString(3, addMeasurements);
+        ps.setString(4, addIngredients);
+        ps.setString(5, addInstructions);
         ps.executeUpdate();
 
         System.out.println("Recipe added successfully!");
@@ -225,9 +229,11 @@ public class CookBook {
 
         System.out.println("\nWhat do you want to edit?");
         System.out.println("1. Recipe Name");
-        System.out.println("2. Measurements");
-        System.out.println("3. Ingredients");
-        System.out.println("4. Instructions");
+        System.out.println("2. Category");
+        System.out.println("3. Measurements");
+        System.out.println("4. Ingredients");
+        System.out.println("5. Instructions");
+        System.out.println("6. Exit Editing");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -241,16 +247,24 @@ public class CookBook {
                 prompt = "Enter new recipe name:";
             }
             case 2 -> {
+                columnName = "Category";
+                prompt = "Enter new category";
+            }
+            case 3 -> {
                 columnName = "Measurements"; 
                 prompt = "Enter new measurements";
             }
-            case 3 -> {
+            case 4 -> {
                 columnName = "Ingredients";
                 prompt = "Enter new ingredients";
             }
-            case 4 -> {
+            case 5 -> {
                 columnName = "Instructions";
                 prompt = "Enter new instructions";
+            }
+            case 6 -> {
+                System.out.print("Exiting editing");
+                return;
             }
             default -> {
                 System.out.println("Invalid choice");

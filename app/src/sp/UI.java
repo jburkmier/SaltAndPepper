@@ -26,12 +26,14 @@ public class UI {
             String user = promptRequiredString(scanner, "Database Username");
             String pass = promptPassword("Database Password");
 
+
 			try {
 				connection = DriverManager.getConnection(url, user, pass);
 				System.out.println("Connected successfully.");
 				return;
 			} catch (SQLException ex) {
 				System.out.println("Connection failed: " + ex.getMessage());
+				System.out.println("Ensure that MySQL is a running service on your local machine");
 				boolean retry = confirm(scanner, "Try again?");
 				if (!retry) {
 					System.out.println("Exiting.");
