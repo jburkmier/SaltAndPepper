@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories {
@@ -11,11 +12,19 @@ sourceSets {
         java {
             srcDirs = ['app/src']
         }
+        resources {
+            srcDirs = ['app/resources']
+        }
     }
 }
 
 application {
-    mainClass = 'sp.Main'
+    mainClass = 'sp.JavaFXGUI.SaltAndPepperApp'
+}
+
+javafx {
+    version = '21.0.2'
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 run {
@@ -27,10 +36,8 @@ dependencies {
 }
 
 javadoc {
-    source = fileTree('app/src'){
-        include '**/*.java'
-    }
-    classpath = files()
+    source = sourceSets.main.allJava
+    classpath = sourceSets.main.compileClasspath
     destinationDir = file("$buildDir/docs/javadoc")
 }
 

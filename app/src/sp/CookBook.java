@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -21,6 +23,11 @@ public class CookBook {
      */
     public CookBook(Scanner scanner, Connection connection) {
         this.scanner = scanner;
+        this.connection = connection;
+    }
+
+    public CookBook(Connection connection){
+        this.scanner =  null; 
         this.connection = connection;
     }
 
@@ -74,8 +81,44 @@ public class CookBook {
         }
         
     /**
+ * Gets all recipes in the Recipe Book.
+ *
+ * @return a list containing all recipes
+ */
+public List<String> viewAll() {
+
+    List<String> recipes = new ArrayList<>();
+
+    String sql = """
+        SELECT Recipe.Meal_Name, Recipe.Category
+        FROM RECIPE
+        """;
+
+    try (
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            String category = rs.getString("Category");
+            String mealName = rs.getString("Meal_Name");
+
+            recipes.add(category + ": " + mealName);
+        }
+
+    } catch (SQLException e) {
+        System.out.println(
+            "Error loading recipes: " + e.getMessage()
+        );
+    }
+
+    return recipes;
+}
+    /**
      * Displays all recipes in the Recipe Book
      */
+    /**
     public void viewAll(){               
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -107,6 +150,7 @@ public class CookBook {
         }
         
     }
+    */
 
     /**
      * Allows users to enter recipe name to view the recipe page
