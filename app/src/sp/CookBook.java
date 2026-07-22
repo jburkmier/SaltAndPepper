@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import sp.Recipe;
+
 /**
  * Interacts with the database of recipes
  */
@@ -85,12 +87,12 @@ public class CookBook {
  *
  * @return a list containing all recipes
  */
-public List<String> viewAll() {
+public List<Recipe> viewAll() {
 
-    List<String> recipes = new ArrayList<>();
+    List<Recipe> recipes = new ArrayList<>();
 
     String sql = """
-        SELECT Recipe.Meal_Name, Recipe.Category
+        SELECT Meal_Name, Category, Measurements, Ingredients, Instructions
         FROM RECIPE
         """;
 
@@ -100,11 +102,15 @@ public List<String> viewAll() {
     ) {
 
         while (rs.next()) {
+            Recipe recipe = new Recipe(
+                rs.getString("Meal_Name"),
+                rs.getString("Category"),
+                rs.getString("Measurements"),
+                rs.getString("Ingredients"), 
+                rs.getString("Instructions")
+            );
 
-            String category = rs.getString("Category");
-            String mealName = rs.getString("Meal_Name");
-
-            recipes.add(category + ": " + mealName);
+            recipes.add(recipe);
         }
 
     } catch (SQLException e) {
